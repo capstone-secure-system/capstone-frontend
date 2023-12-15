@@ -2,16 +2,20 @@ import React, { useState, useEffect, useRef } from 'react';
 import './App.css'; // App.css 파일을 import
 
 const App = () => {
-  const [logs, setLogs] = useState([]);
-  const [playing, setPlaying] = useState(false);
+    const [playing, setPlaying] = useState(false);
   const [capturedImages, setCapturedImages] = useState([]);
   const videoRef = useRef(null);
-  const containerRef = useRef(null);
+  //const containerRef = useRef(null);
   const imagesContainerRef = useRef(null); // 이미지 컨테이너의 ref 추가
   const HEIGHT = 500;
   const WIDTH = 500;
   const captureInterval = 5000; // 5초마다 자동 캡처
   const maxCapturedImages = 6; // 최대 보여줄 캡처 이미지 수
+
+  const [logs, setLogs] = useState([
+    // 초기 로그 데이터
+    { id: 1, title: 'fall-detected', category: 'dead', date: '2022-09-20 15:35:26', count: 3 },
+     ]);
 
   const capturePhoto = () => {
     if (videoRef.current) {
@@ -96,18 +100,40 @@ const App = () => {
         <h1>예인수조 안전시스템 관리</h1>
       </header>
       <main className="main-content">
-        <div className="video-container">
+      <div className="video-container">
+          <h2 className="webcam-title">실시간 영상</h2>
           <video ref={videoRef} autoPlay playsInline muted />
         </div>
         <div className="log-container">
-          <h2>넘어짐 탐지 기록</h2>
-          <div className="log-list-container" ref={containerRef}>
-            <ul className="log-list">
+          <h2>탐지 기록</h2>
+          <table className="log-table">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>사고 종류</th>
+                <th>상황</th>
+                <th>날짜</th>
+                <th>탐지된 인원</th>
+                <th>상세보기</th>
+              </tr>
+            </thead>
+            <tbody>
               {logs.map((log, index) => (
-                <li key={index}>{log}</li>
+                <tr key={index}>
+                  <td>{log.id}</td>
+                  <td>{log.title}</td>
+                  <td>{log.category}</td>
+                  <td>{log.date}</td>
+                  <td>{log.count}</td>
+                  <td>
+                    <button onClick={() => {/* 여기에 사진 보여주는 로직 추가 */}}>
+                    보기
+                    </button>
+                  </td> {/* 추가된 부분 */}
+                </tr>
               ))}
-            </ul>
-          </div>
+            </tbody>
+          </table>
         </div>
       </main>
       <div className="app__capturedImages" ref={imagesContainerRef}>
