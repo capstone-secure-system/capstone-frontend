@@ -96,11 +96,10 @@ const Video = () => {
 
   return (
     <>
-      <div className="video-container">
-          <h2 className="webcam-title">
-            실시간 영상
-          </h2>
-          <video ref={videoRef} autoPlay playsInline muted />
+      <div className="webcam-container">
+          <div className="video-container">
+            <video ref={videoRef} autoPlay playsInline muted />
+          </div>  
       </div>
       <div className="app__capturedImages" ref={imagesContainerRef}>
         {capturedImages.map(({ imageUrl, timestamp }, index) => (

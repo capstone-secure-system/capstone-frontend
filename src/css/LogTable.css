@@ -2,14 +2,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     margin-top: 50px;
   }
 
 /* 테이블 스타일 */
 .log-table {
-    width: 50%;
+    width: 100%;
     border-collapse: collapse; /* 테이블 셀 사이의 공간을 없앱니다. */
     text-align: center; /* 텍스트를 가운데 정렬합니다. */
+    margin-bottom: 20px;
   }
   
 .log-table th, .log-table td {
