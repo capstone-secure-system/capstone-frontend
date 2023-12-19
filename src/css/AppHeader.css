@@ -1,0 +1,11 @@
+/* 헤더 스타일 */
+.header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+}
+   
+.header h1 {
+    font-size: 2rem;
+}
