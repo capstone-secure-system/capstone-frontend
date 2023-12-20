@@ -1,0 +1,39 @@
+.log-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+  }
+
+/* 테이블 스타일 */
+.log-table {
+    width: 100%;
+    border-collapse: collapse; /* 테이블 셀 사이의 공간을 없앱니다. */
+    text-align: center; /* 텍스트를 가운데 정렬합니다. */
+    margin-bottom: 20px;
+  }
+  
+.log-table th, .log-table td {
+    padding: 0.5rem;
+    border: 1px solid #ddd; /* 셀의 테두리를 설정합니다. */
+}
+  
+.log-table th {
+    background-color: #f4f4f4; /* 테이블 헤더의 배경색을 설정합니다. */
+}
+  
+  /* '상세보기' 버튼 스타일 */
+.log-table button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #000000;
+    color: white;
+    cursor: pointer;
+  }
+  
+.log-table button:hover {
+    background-color: #333333;
+  }
+  
