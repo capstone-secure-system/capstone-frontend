@@ -4,6 +4,7 @@ import '../css/LogTable.css';
 import SnapShotDetail from '../modal/SnapShotDetail';
 import axios from 'axios';
 import TableHead from './TableHead';
+import io from 'socket.io-client';
 
 const LogTable = () => {
     const itemsPerPage = 8;
@@ -17,7 +18,7 @@ const LogTable = () => {
 
     const fetchLogs = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/fallen");
+            const response = await axios.get("http://13.209.176.7:3000/fallen");
             setLogs(response.data);
             setPageCount(Math.ceil(response.data.length/itemsPerPage));
         } catch (error) {
@@ -35,6 +36,16 @@ const LogTable = () => {
             setCurrentItems(newCurrentItems);
         }
     },[logs,currentPage]);
+
+    useEffect(() => {
+        const socket = io('http://13.209.176.7:5050');
+
+        socket.on('data',newData => {
+            setLogs(newData);
+        });
+
+        return () => socket.disconnect();
+    },[]);
 
     const handleShowModal = (log) => {
         setLog(log);
@@ -64,7 +75,7 @@ const LogTable = () => {
                 {
                     currentItems.map((log,index) => (
                         <tr key={index}>
-                            <td>{log.snapShotId}</td>
+                            <td>{log.snapshotId}</td>
                             <td>{log.label}</td>
                             <td>{formatDate(log.createdAt)}</td>
                             <td>{log.detectedNum}</td>
