@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRefr } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom'
 import './App.css'; // App.css 파일을 import
 import LogContainer from './component/LogContainer';
 import AppHeader from './component/AppHeader';
@@ -11,6 +11,7 @@ const App = () => {
       <div className="App">
         <AppHeader />
         <Routes>
+          <Route path="/" element={<Navigate replace to="/logs" />} />
           <Route path="/streaming" element={<Video/>}/>
           <Route path="/logs" element={<LogContainer/>}/>
         </Routes>

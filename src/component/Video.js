@@ -101,17 +101,6 @@ const Video = () => {
             <video ref={videoRef} autoPlay playsInline muted />
           </div>  
       </div>
-      <div className="app__capturedImages" ref={imagesContainerRef}>
-        {capturedImages.map(({ imageUrl, timestamp }, index) => (
-          <div key={index} className="app__capturedImageContainer">
-            <img src={imageUrl} alt={`Captured ${index}`} className="app__capturedImage" />
-            <div className="app__capturedInfo">
-              <p>Captured on: {timestamp}</p>
-              <button onClick={() => downloadImage(imageUrl)}>Download Image</button>
-            </div>
-          </div>
-        ))}
-      </div>
     </>
   );
 };

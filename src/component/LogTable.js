@@ -2,13 +2,33 @@ import React,{useEffect,useState} from 'react';
 import ReactPaginate from 'react-paginate';
 import '../css/LogTable.css';
 import SnapShotDetail from '../modal/SnapShotDetail';
+import axios from 'axios';
+import TableHead from './TableHead';
+import io from 'socket.io-client';
 
-const LogTable = ({logs,pageCount}) => {
+const LogTable = () => {
     const itemsPerPage = 8;
     const [currentPage,setCurrentPage] = useState(0);
     const [log,setLog] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [currentItems,setCurrentItems] = useState([]);
+
+    const [logs,setLogs] = useState([]);
+    const [pageCount,setPageCount] = useState(0);
+
+    const fetchLogs = async () => {
+        try {
+            const response = await axios.get("http://13.209.176.7:3000/fallen");
+            setLogs(response.data);
+            setPageCount(Math.ceil(response.data.length/itemsPerPage));
+        } catch (error) {
+            console.error('Error fetching logs:', error);
+        }
+    }
+
+    useEffect(() => {
+        fetchLogs();
+    },[]);
 
     useEffect(() => {
         if (Array.isArray(logs)) {
@@ -16,6 +36,16 @@ const LogTable = ({logs,pageCount}) => {
             setCurrentItems(newCurrentItems);
         }
     },[logs,currentPage]);
+
+    useEffect(() => {
+        const socket = io('http://13.209.176.7:5050');
+
+        socket.on('data',newData => {
+            setLogs(newData);
+        });
+
+        return () => socket.disconnect();
+    },[]);
 
     const handleShowModal = (log) => {
         setLog(log);
@@ -40,20 +70,12 @@ const LogTable = ({logs,pageCount}) => {
     return (
         <div>
         <table className="log-table">
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>상황</th>
-                    <th>날짜</th>
-                    <th>탐지된 인원</th>
-                    <th>상세보기</th>
-                </tr>
-            </thead>
+            <TableHead />
             <tbody>
                 {
                     currentItems.map((log,index) => (
                         <tr key={index}>
-                            <td>{log.snapShotId}</td>
+                            <td>{log.snapshotId}</td>
                             <td>{log.label}</td>
                             <td>{formatDate(log.createdAt)}</td>
                             <td>{log.detectedNum}</td>
