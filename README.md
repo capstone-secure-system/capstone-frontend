@@ -1,8 +1,10 @@
 # 객체 탐지를 통한 예인 수조 안전시스템
 
 ### 프로젝트 소개
-백엔드 개발 및 Yolov5 fine-tuning : 총 1인
+백엔드 개발 및 Yolov5 fine-tuning : 총 1인 
+
 하드웨어 개발 : 총 1인
+
 프론트엔드 개발 : 총 1인
 
 environment : Github, Google Colab, Visual Studio Code, Linux
@@ -15,7 +17,7 @@ backend tech : NestJS
 
 frontend tech : React JS
 
-devops tech : EC2, DynamoDB (using DynamoDB Streams),AWS Lambda, AWS SNS & SMS, AWS Lambda
+devops tech : EC2, DynamoDB (using DynamoDB Streams),AWS Lambda, AWS SNS & SMS, AWS Lambda, AWS S3
 
 해당 프로젝트는 예인 수조 작업장 환경에서 작업자가 쓰러진 경우 제빠른 대처를 통한 인명사고 방지하기 위해 고안되었으며, AI와 클라우드를 결합하여 직업자의 신변 안전을 보장 할 수 있도록 개발된 프로젝트입니다.
 작업자 쓰러짐 감지시 관련 정보를 서버에 전송하고, 관계자들에게 비상상황 알림 문자를 발송합니다.
